@@ -1,3 +1,4 @@
+require 'date'
 require 'datey/interrogator'
 
 module Datey
