@@ -12,7 +12,7 @@ module Datey
     # Return the date and time
     #
     def date_and_time
-      "#{date} at #{time}"
+      @time.is_a?(Time) ? "#{date} at #{time}" : date
     end
     
     # 
