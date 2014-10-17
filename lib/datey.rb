@@ -3,8 +3,8 @@ require 'datey/interrogator'
 
 module Datey
   
-  def self.format(date)
-    Formatter.new(date)
+  def self.format(date, context = :past)
+    Formatter.new(date, context)
   end
   
   def self.interrogate(date)

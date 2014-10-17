@@ -26,9 +26,11 @@ The formatter in Datey is designed to spit out a friendly looking date with some
 
 These can then be combined with the time too, if needed. When you include the time, it will either be outputted as `3pm` or `3:30pm`. If there are no minutes, it will simply not display them at all.
 
+When creating the formatter, you should include an appropriate context as either `:future` or `:past`. The value you use here will depend on the page in which you are displaying these dates. For example, if you're displaying an activity feed you'd want to use `past` whereas if you're displaying a list of upcoming events, you might use `:future`.
+
 ```ruby
 date      = Time.new(2014, 10, 15, 3, 45)
-formatter = Datey::Formatter.new(date)
+formatter = Datey::Formatter.new(date, :future)
 formatter.date            #=> "Today"
 formatter.time            #=> "3:45am"
 formatter.date_and_time   #=> "Today at 3:45am"

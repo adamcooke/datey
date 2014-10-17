@@ -4,8 +4,9 @@ require 'datey/interrogator'
 module Datey
   class Formatter
 
-    def initialize(time)
+    def initialize(time, context = :past)
       @time = time
+      @context = context
     end
     
     #
@@ -36,11 +37,15 @@ module Datey
         "Yesterday"
       elsif interrogator.tomorrow?
         "Tomorrow"
-      elsif interrogator.last_x_days?(7)
-        "Last #{name_of_day}"
-      elsif interrogator.next_x_days?(6)
+      elsif @context == :future && interrogator.next_x_days?(6)
         name_of_day
-      elsif interrogator.next_week?
+      elsif @context == :future && interrogator.next_week?
+        "Next #{name_of_day}"
+      elsif @context == :past && interrogator.last_x_days?(6)
+        name_of_day
+      elsif @context == :past && interrogator.last_x_days?(12)
+        "Last #{name_of_day}"
+      elsif @context == :past && interrogator.next_x_days?(6)
         "Next #{name_of_day}"
       else
         string = "#{name_of_day} #{day_of_month} #{name_of_month}"
