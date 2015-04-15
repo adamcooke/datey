@@ -36,6 +36,15 @@ formatter.time            #=> "3:45am"
 formatter.date_and_time   #=> "Today at 3:45am"
 ```
 
+You can also disable capitalization if you'd prefer.
+
+```ruby
+date      = Time.new(2014, 10, 15, 3, 45)
+formatter = Datey::Formatter.new(date, :future)
+formatter.date(:capitalize => false)            #=> "today"
+formatter.date_and_time(:capitalize => false)   #=> "today at 3:45am"
+```
+
 ### Interrogating
 
 The formatter makes use an Interrogator which looks at a given date and returns true or false values depending on "questions" you ask. As follows:
@@ -44,13 +53,13 @@ The formatter makes use an Interrogator which looks at a given date and returns 
 date          = Date.new(2014, 10, 16)
 interrogator  = Datey::Interrogator.new(date)
 
-# Once you have set up an interrogation instance, you can use any of the 
+# Once you have set up an interrogation instance, you can use any of the
 # following methods which will all return true or false.
 interrogator.today?
 interrogator.yesterday?
 interrogator.tomorrow?
 interrogator.last_week?         #=> Date occurs on any day in the week preceding the current week
-interrogator.last_x_days?(7)    #=> Date occurs in the last X days 
+interrogator.last_x_days?(7)    #=> Date occurs in the last X days
 interrogator.next_x_days?(7)    #=> Date occurs in the next X days
 interrogator.this_week?         #=> Date occurs in the current week (Sun -> Sat)
 interrogator.next_week?         #=> Date occurs in the week following the current week
